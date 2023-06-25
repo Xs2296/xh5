@@ -1,36 +1,18 @@
 <template>
   <div class="layout-page" :style="themeStyle">
-    <!-- <v-header :title="$t('help.a1')"></v-header> -->
-    <v-header :title="$t('base.a7')"></v-header>
-	
+    <v-header :title="$t('expand.关于我们')"></v-header>
+
     <main class="layout-main">
-      <template v-for="parentItem  in list">
-       <!-- <v-link
-          tag="div"
-          :to="{path:'/pages/help/sort',query:{id:parentItem.id,title:parentItem.name}}"
-          class="p-md color-light fn-20 "
-          :key="parentItem.id"
-        >{{parentItem.title}}</v-link> -->
-		<view class="p-md color-light fn-20 ">{{parentItem.title}}</view>
-        <div class="m-x-md m-b-md p-md bg-panel-4 rounded box-shadow" >
-			<v-link
-			  tag="div"
-			  :to="{path:'/pages/help/detail',query:{id:parentItem.id}}"
-			  class="item p-y-xs border-b d-flex justify-between"
-			>
-			  <div class="eps-1 color-light">{{parentItem.excerpt}}</div>
-			  <van-icon name="arrow" />
-			</v-link>
-          <!-- <v-link
-            tag="div"
-            :to="{path:'/pages/help/detail',query:{id:item.id}}"
-            class="item p-y-xs border-b d-flex justify-between"
-            v-for="item in parentItem.article"
-            :key="item.id"
+      <template v-for="item  in list">
+        <div class="m-x-md m-b-md p-md bg-panel-4 rounded box-shadow">
+          <v-link
+              tag="div"
+              :to="{path:'/pages/help/detail',query:{id:item.id}}"
+              class="item p-y-xs border-b d-flex justify-between"
           >
-            <div class="eps-1 color-light">{{parentItem.title}}</div>
-            <van-icon name="arrow" />
-          </v-link> -->
+            <div class="eps-1 color-light">{{ item.title }}</div>
+            <van-icon name="arrow"/>
+          </v-link>
         </div>
       </template>
     </main>
@@ -39,6 +21,7 @@
 <script>
 import College from "@/api/college";
 import {mapGetters} from 'vuex'
+
 export default {
   name: "help",
   data() {
@@ -51,9 +34,8 @@ export default {
   },
   methods: {
     college() {
-      College.getArticleList({type:'help_center',page:1}).then((res) => {
-        this.list = res.data.data;
-		console.log(res.data.data,2)
+      College.getServiceIndex().then((res) => {
+        this.list = res.data;
       });
     },
   },

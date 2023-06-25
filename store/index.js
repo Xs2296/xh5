@@ -69,7 +69,7 @@ let store = new Vuex.Store({
     lang: uni.getStorageSync('lang')||'en',
     langList: [
       {
-        value: 'cn',
+        value: 'zh',
         label: '简体中文'
       },
       {

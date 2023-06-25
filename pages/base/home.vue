@@ -41,8 +41,8 @@
 					</view>
 				</template>
 			</v-notice-bar>
-			
-			
+
+
 			<!-- 次一级导航 -->
 			<view class="nav2 p-x-md m-t-xl d-flex justify-around fn-center bg-panel-3 box-shadow"
 				style="padding-top: 15px;padding-bottom: 15px; margin: auto 15px; border-radius: 10px;    display: block;">
@@ -103,15 +103,15 @@
 						<view class="stock-index-img fn-12 color-gray-6 m-b-md">
 							<view>
 								<text class="fn-18 color-light">{{ item.pair_name }}</text>
-								
+
 								<view v-if="item.pair_name == 'BTC/USDT'" style="text-align: center;">
 									<text :class="btcIncrease * 1 < 0 ? 'color-sell' : 'color-buy'">{{btcIncreaseStr}}</text>
 								</view>
-								
+
 								<view v-if="item.pair_name == 'ETH/USDT'" style="text-align: center;">
 									<text :class="ethIncrease * 1 < 0 ? 'color-sell' : 'color-buy'">{{ethIncreaseStr}}</text>
 								</view>
-								
+
 								<view v-if="item.pair_name == 'LTC/USDT'" style="text-align: center;">
 									<text :class="ltcIncrease * 1 < 0 ? 'color-sell' : 'color-buy'">{{ltcIncreaseStr}}</text>
 								</view>
@@ -216,26 +216,24 @@
 					<img :src="$localImgUrl('Page3.png')" alt="" class="h-20 m-r-xs" />
 					<span class="color-light">{{ $t('base.c3') }}</span>
 				</v-link>
-				<v-link to="/pages/notice/index" tag="div" class="per-bot p-y-md p-l-sm border-b d-flex align-center">
-					<img :src="$localImgUrl('Page4.png')" alt="" class="h-20 m-r-xs" />
-					<span class="color-light">{{ $t('base.c4') }}</span>
-				</v-link>
+
 				<v-link to="/pages/assets/address-list" tag="div"
 					class="per-bot p-y-md p-l-sm border-b d-flex align-center">
 					<img :src="$localImgUrl('Page5.png')" alt="" class="h-20 m-r-xs" />
 					<span class="color-light">{{ $t('base.c5') }}</span>
 				</v-link>
+
 				<v-link to="/pages/accountSettings/accountSettings" tag="div"
 					class="per-bot p-y-md p-l-sm border-b d-flex align-center">
 					<img :src="$localImgUrl('Page7.png')" alt="" class="h-20 m-r-xs" />
 					<span class="color-light">{{ $t('base.c6') }}</span>
 				</v-link>
-				
-				
-				<v-link to="/pages/help/pingtai" tag="div"
+
+
+				<v-link to="/pages/help/index" tag="div"
 					class="per-bot p-y-md p-l-sm border-b d-flex align-center">
 					<img :src="$localImgUrl('Page7.png')" alt="" class="h-20 m-r-xs" />
-					<span class="color-light">{{ $t('expand.平台介绍') }}</span>
+					<span class="color-light">{{ $t('expand.关于我们') }}</span>
 				</v-link>
 
 				<view class="per-bot p-y-md p-l-sm border-b d-flex align-center">
@@ -394,7 +392,7 @@
 			},
 			// 获取涨跌之前的价格
 			getOldPrice(price, rate) {
-				
+
 				return math.multiple(math.division(price, 1 + rate * 1), rate, 2);
 			},
 			toAccountSettings() {
@@ -422,7 +420,7 @@
 					this.indexArticle = res.data.article;
 					this.notice = res.data.noticeList;
 					// this.indexList = res.data.brokenLine;
-					
+
 					// this.marketList = res.data.marketList;
 					this.infoActive = 1;
 					// this.dunshift();
@@ -544,7 +542,7 @@
 					type: 'exchange',
 					data: ''
 				});
-				
+
 				this.nws.on('message', res => {
 					let {
 						data,
@@ -556,7 +554,7 @@
 						this.replaceOptional();
 					}
 					if (type == 'pong') {
-						
+
 					}
 				});
 			},
@@ -574,10 +572,10 @@
 			// if (this.isLogin) {
 			// 	this.createWalletAddress();
 			// }
-			
+
 		},
 		destroyed() {
-			
+
 		}
 	};
 </script>

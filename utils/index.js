@@ -9,6 +9,9 @@ import clone from './class/object';
 
 import random from './class/string';
 
+import func from './class/func';
+
+
 // 载入防抖和节流的方法
 import debounce from './funcs/debounce';
 import throttle from './funcs/throttle';
@@ -25,11 +28,12 @@ import common from './vendor/common';
 // webpack 全局加载的模块 以`export`而非`export default`导出，
 // 她类似于module.exports或者exports的规则
 export default {
-    ...math, // omit, ,,, 
+    ...math, // omit, ,,,
     ...date,
     ...array,
     ...clone,
     ...random,
+    ...func,
     debounce,
     throttle,
     validate,
