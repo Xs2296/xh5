@@ -4,17 +4,19 @@
     <view class="d-flex justify-center p-t-md">
       <view class="d-flex bg-form-panel-4 rounded-lg overflow-scroll">
         <view
-          :class="{ 'bg-gradient-blue color-plain rounded-lg': tab == 0 }"
-          @click="tab = 0"
-          class="p-y-xs p-x-lg min-w-60 fn-center"
-          >{{$t('exchange.a0')}}</view
+            :class="{ 'bg-gradient-blue color-plain rounded-lg': tab == 0 }"
+            @click="tab = 0"
+            class="p-y-xs p-x-lg min-w-60 fn-center"
+        >{{ $t('exchange.a0') }}
+        </view
         >
         <view
-          :class="{ 'bg-gradient-blue color-plain rounded-lg': tab == 1 }"
-          @click="tab = 1"
-          class="p-y-xs p-x-lg min-w-60 fn-center"
-          v-if="true"
-          >{{$t('exchange.a1')}}</view
+            :class="{ 'bg-gradient-blue color-plain rounded-lg': tab == 1 }"
+            @click="tab = 1"
+            class="p-y-xs p-x-lg min-w-60 fn-center"
+            v-if="true"
+        >{{ $t('exchange.a1') }}
+        </view
         >
       </view>
     </view>
@@ -22,13 +24,13 @@
     <template v-if="tab == 0">
       <!-- 币币交易 -->
       <view
-        class="coin-exchange-box flex-fill d-flex flex-col overflow-hidden border-b"
+          class="coin-exchange-box flex-fill d-flex flex-col overflow-hidden border-b"
       >
         <van-tabs
-          :ellipsis="false"
-          :border="false"
-          :active="tab1"
-          @change="tab1 = $event.detail.name"
+            :ellipsis="false"
+            :border="false"
+            :active="tab1"
+            @change="tab1 = $event.detail.name"
         >
           <van-tab class="height-max" :title="$t('exchange.a3')"></van-tab>
           <van-tab class="height-max" :title="$t('exchange.a4')"></van-tab>
@@ -36,40 +38,40 @@
         </van-tabs>
         <!-- 交易表单 -->
         <exchange-transaction
-          @symbol="symbolListShow = true"
-          :marketList="marketList"
-          :collect="collect"
-          :query="query"
-          @option="option"
-          :isShow="isShow"
-          class="layout-main"
-          v-if="tab1 == 0 && query.symbol"
+            @symbol="symbolListShow = true"
+            :marketList="marketList"
+            :collect="collect"
+            :query="query"
+            @option="option"
+            :isShow="isShow"
+            class="layout-main"
+            v-if="tab1 == 0 && query.symbol"
         />
         <!-- 当前委托 -->
-        <current-commission class="layout-main" v-if="tab1 == 1" />
+        <current-commission class="layout-main" v-if="tab1 == 1"/>
         <!-- 历史委托 -->
-        <history-commisson class="layout-main" v-if="tab1 == 2" />
+        <history-commisson class="layout-main" v-if="tab1 == 2"/>
       </view>
     </template>
     <!-- 申购 -->
     <template v-if="tab == 1">
-      <purchase />
+      <purchase/>
     </template>
     <!-- 左侧的弹窗 -->
     <van-popup
-      :show="symbolListShow"
-      @close="symbolListShow = false"
-      close-on-popstate
-      position="left"
-      custom-style="height:100%;width:70%"
+        :show="symbolListShow"
+        @close="symbolListShow = false"
+        close-on-popstate
+        position="left"
+        custom-style="height:100%;width:70%"
     >
       <symbol-list
-        :collect="collect"
-        :marketList="marketList"
-        @check-symbol="checkSymbol"
+          :collect="collect"
+          :marketList="marketList"
+          @check-symbol="checkSymbol"
       />
     </van-popup>
-    <van-toast id="van-toast" />
+    <van-toast id="van-toast"/>
   </view>
 </template>
 <script>
@@ -80,7 +82,8 @@ import symbolList from "@/pages/exchange/symbol-list";
 import purchase from "@/pages/purchase/index";
 import Market from "@/api/market";
 import Home from "@/api/home";
-import { mapState } from "vuex";
+import {mapState} from "vuex";
+
 export default {
   name: "exchange-operation",
   props: ["isShow"],
@@ -145,17 +148,15 @@ export default {
     getCollect() {
       if (!this.isLogin) return;
       Home.getCollect()
-        .then((res) => {
-          this.collect = res.data || [];
-        })
-        .catch(() => {});
+          .then((res) => {
+            this.collect = res.data || [];
+          })
     },
     //
     checkSymbol(obj) {
       this.symbolListShow = false;
       if (obj.pair_name == this.query.symbol) return;
-      this.query = { symbol: obj.pair_name };
-      // this._router.replace({ query: { symbol: obj.pair_name } });
+      this.query = {symbol: obj.pair_name};
     },
     // 添加自选
     option() {
@@ -163,15 +164,16 @@ export default {
         pair_name: this.query.symbol,
       };
       Home.option(data)
-        .then((res) => {
-          this.getCollect();
-          if (res.data) {
-            this.$toast(this.$t("exchange.a6"));
-          } else {
-            this.$toast(this.$t("exchange.a7"));
-          }
-        })
-        .catch(() => {});
+          .then((res) => {
+            this.getCollect();
+            if (res.data) {
+              this.$toast(this.$t("exchange.a6"));
+            } else {
+              this.$toast(this.$t("exchange.a7"));
+            }
+          })
+          .catch(() => {
+          });
     },
     // 链接socket
     linkSocket() {
@@ -181,7 +183,7 @@ export default {
         msg,
       });
       this.ws.on("message", (res) => {
-        let { data, sub } = res;
+        let {data, sub} = res;
         if (sub == msg) {
           this.marketList = data;
         }
@@ -191,11 +193,13 @@ export default {
     getQuery() {
       let curPage = getCurPage();
       let curParam = curPage.options || curPage.$route.query;
+
       function getCurPage() {
         let pages = getCurrentPages();
         let curPage = pages[pages.length - 1];
         return curPage;
       }
+
       return curParam;
     },
   },

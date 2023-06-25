@@ -75,12 +75,12 @@
 						icon: 'static/img/base_qukuai_0.png',
 						activeIcon: 'static/img/base_qukuai_1.png'
 					},
-					{
-						label: this.$t('base.a4'),
-						tel: 'miao',
-						icon: 'static/img/base_caidan_0.png',
-						activeIcon: 'static/img/base_caidan_1.png'
-					},
+					// {
+					// 	label: this.$t('base.a4'),
+					// 	tel: 'miao',
+					// 	icon: 'static/img/base_caidan_0.png',
+					// 	activeIcon: 'static/img/base_caidan_1.png'
+					// },
 					// {
 					//   label: this.$t("base.a4"),
 					//   tel: "option-list",
