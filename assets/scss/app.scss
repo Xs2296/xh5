@@ -1,0 +1,603 @@
+// 样式重置
+table {
+    border-collapse: collapse;
+
+    th,
+    td {
+        border-color: inherit;
+    }
+}
+
+p {
+    margin: 0;
+}
+
+input {
+    background: transparent;
+    border: none;
+}
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+// 边框
+$dir1: (top t, right r, bottom b, left l);
+$dir2: (top left tl, top right tr, bottom right br, bottom left bl);
+// 颜色
+$color-list: (
+    plain $plain,
+    dark $black,
+    light $light,
+    gray-1 $gray-1,
+    gray-2 $gray-2,
+    gray-3 $gray-3,
+    gray-4 $gray-4,
+    gray-5 $gray-5,
+    gray-6 $gray-6,
+    gray-7 $gray-7,
+    gray-8 $gray-8,
+    gray-9 $gray-9,
+    danger $red,
+    primary $blue,
+    warning $orange,
+    yellows $yellow,
+    warning-dark $orange-dark,
+    warning-light $orange-light,
+    success $green,
+    buy $buy,
+    sell $sell,
+    theme-1 $theme-1,
+    panel-1 $panel-1,
+    panel-2 $panel-2,
+    panel-3 $panel-3,
+    panel-4 $panel-4,
+    panel-5 $panel-5,
+    panel-6 $panel-6,
+    form-panel-4 $form-panel-4,
+    form-panel-3 $form-panel-3,
+    tab-nav $tab-nav
+);
+// 颜色(不包含css变量)
+$color-list2: (
+    dark $black,
+    gray-1 $gray-1,
+    gray-2 $gray-2,
+    gray-3 $gray-3,
+    gray-4 $gray-4,
+    gray-5 $gray-5,
+    gray-6 $gray-6,
+    gray-7 $gray-7,
+    gray-8 $gray-8,
+    gray-9 $gray-9,
+    danger $red,
+    primary $blue,
+    warning $orange,
+    yellows $yellow,
+    warning-dark $orange-dark,
+    warning-light $orange-light,
+    success $green,
+    buy $buy,
+    sell $sell,
+    theme-1 $theme-1,
+    panel-5 $panel-5,
+    panel-6 $panel-6
+);
+// 间距
+$pad: (
+    base: $padding-base,
+    xs: $padding-xs,
+    sm: $padding-sm,
+    md: $padding-md,
+    lg: $padding-lg,
+    xl: $padding-xl,
+);
+
+// 公用样式
+.d-flex {
+    display: flex;
+}
+
+.d-inline-flex {
+    display: inline-flex;
+}
+
+.d-inline {
+    display: inline;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.d-block {
+    display: block;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-stretch {
+    align-items: stretch;
+}
+
+.align-start {
+    align-items: flex-start;
+}
+
+.align-end {
+    align-items: flex-end;
+}
+
+.flex-fill {
+    flex: 1;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-shrink {
+    flex-shrink: 0;
+}
+
+.float-r {
+    float: right;
+}
+
+.float-l {
+    float: left;
+}
+
+.clear {
+    &::after {
+        display: block;
+        content: "";
+        clear: both;
+    }
+}
+
+// 字体尺寸
+.fn-xs {
+    font-size: $font-size-xs;
+}
+
+.fn-sm {
+    font-size: $font-size-sm;
+}
+
+.fn-md {
+    font-size: $font-size-md;
+}
+
+.fn-lg {
+    font-size: $font-size-lg;
+}
+
+.fn-bold {
+    font-weight: bold;
+}
+
+.fn-center {
+    text-align: center;
+}
+
+.fn-left {
+    text-align: start;
+}
+
+.fn-right {
+    text-align: end;
+}
+
+.fn-middle {
+    vertical-align: middle;
+}
+
+.fn-wrap {
+    white-space: normal;
+    word-break: break-word;
+}
+
+.fn-nowrap {
+    white-space: nowrap;
+}
+
+$i: 10;
+
+@while $i <=40 {
+    .fn-#{$i} {
+        font-size: $i + px;
+    }
+
+    $i: $i + 1;
+}
+
+$i: 1;
+
+@while $i<=4 {
+    .eps-#{$i} {
+        @include eps($i);
+    }
+
+    $i: $i + 1;
+}
+
+.color-default {
+    color: $text-color;
+}
+
+@each $item1, $item2 in $color-list {
+    .color-#{$item1} {
+        color: $item2;
+    }
+    .bg-#{$item1} {
+        background-color: $item2;
+    }
+    .border-#{$item1} {
+        &::after {
+            border-color: $item2 !important;
+        }
+    }
+    .border-#{$item1}-original {
+        border-color: $item2 !important;
+    }
+}
+@each $item1, $item2 in $color-list2 {
+    .bg-#{$item1}-transparent {
+        background: rgba($item2, 0.1);
+    }
+}
+
+.border {
+    // border: 1px solid $border-color;
+    position: relative;
+
+    &::after {
+        @include harirline-common();
+        border: 1px solid $border-color;
+    }
+}
+.bg-gradient-blue {
+    background: $gradient-blue;
+}
+.bg-gradient-red {
+    background: $gradient-red;
+}
+.bg-gradient-green {
+    background: $gradient-green;
+}
+
+.border-original {
+    border: 1.02px solid $border-color;
+}
+
+.border-original-0 {
+    border-width: 0px;
+}
+
+@each $item1, $item2 in $dir1 {
+    .border-#{$item2} {
+        position: relative;
+
+        &::after {
+            @include harirline-common();
+            border-#{$item1}: 1px solid $border-color;
+        }
+    }
+
+    .border-#{$item2}-original {
+        border-#{$item1}: 1.02px solid $border-color;
+    }
+
+    .border-#{$item2}-0 {
+        &::after {
+            border-#{$item1}: 0 !important;
+        }
+    }
+
+    .border-#{$item2}-original-0 {
+        border-#{$item1}: 0 !important;
+    }
+}
+
+.rounded {
+    border-radius: $border-radius-md;
+}
+
+.rounded-xs {
+    border-radius: $border-radius-xs;
+}
+.rounded-sm {
+    border-radius: $border-radius-sm;
+}
+
+.rounded-md {
+    border-radius: $border-radius-md;
+}
+
+.rounded-lg {
+    border-radius: $border-radius-lg;
+}
+
+.rounded-max {
+    border-radius: $border-radius-max;
+}
+
+@each $item1, $item2, $item3 in $dir2 {
+    .rounded-#{$item3}-xs {
+        border-#{$item1}-#{$item2}-radius: $border-radius-xs;
+    }
+    .rounded-#{$item3}-sm {
+        border-#{$item1}-#{$item2}-radius: $border-radius-sm;
+    }
+
+    .rounded-#{$item3}-md {
+        border-#{$item1}-#{$item2}-radius: $border-radius-md;
+    }
+
+    .rounded-#{$item3}-lg {
+        border-#{$item1}-#{$item2}-radius: $border-radius-lg;
+    }
+
+    .rounded-#{$item3}-max {
+        border-#{$item1}-#{$item2}-radius: $border-radius-max;
+    }
+}
+
+@each $idx, $var in $pad {
+    // 外间距
+    .m-#{$idx} {
+        margin: $var !important;
+    }
+
+    .m-x-#{$idx} {
+        margin-left: $var !important;
+        margin-right: $var !important;
+    }
+
+    .m-y-#{$idx} {
+        margin-top: $var !important;
+        margin-bottom: $var !important;
+    }
+
+    @each $item1, $item2 in $dir1 {
+        .m-#{$item2}-#{$idx} {
+            margin-#{$item1}: $var !important;
+        }
+    }
+
+    // 内间距
+    .p-#{$idx} {
+        padding: $var !important;
+    }
+
+    .p-x-#{$idx} {
+        padding-left: $var !important;
+        padding-right: $var !important;
+    }
+
+    .p-y-#{$idx} {
+        padding-top: $var !important;
+        padding-bottom: $var !important;
+    }
+
+    @each $item1, $item2 in $dir1 {
+        .p-#{$item2}-#{$idx} {
+            padding-#{$item1}: $var !important;
+        }
+    }
+}
+
+.m-x-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+.m-l-auto {
+    margin-left: auto;
+}
+.m-r-auto {
+    margin-right: auto;
+}
+.box-size {
+    box-sizing: border-box;
+}
+
+// 尺寸
+$i: 1;
+
+@while $i <=100 {
+    .w-#{$i} {
+        width: $i + px;
+    }
+    .min-w-#{$i} {
+        min-width: $i + px;
+    }
+    .max-w-#{$i} {
+        max-width: $i + px;
+    }
+
+    .h-#{$i} {
+        height: $i + px;
+    }
+    .min-h-#{$i} {
+        min-height: $i + px;
+    }
+    .max-h-#{$i} {
+        max-height: $i + px;
+    }
+
+    $i: $i + 1;
+}
+
+$i: 1;
+
+@while $i <=12 {
+    .w-#{$i}\/#{12} {
+        width: #{$i/12 * 100}#{"%"};
+    }
+
+    .h-#{$i}\/#{12} {
+        height: #{$i/12 * 100}#{"%"};
+    }
+
+    $i: $i + 1;
+}
+
+.w-max {
+    width: 100%;
+}
+
+.h-max {
+    height: 100%;
+}
+
+$i: 1;
+
+@while $i <=4 {
+    .line-height-#{$i} {
+        line-height: $i;
+    }
+
+    $i: $i + 1;
+}
+
+// 公共布局
+.layout-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: $bg;
+}
+
+.layout-main {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+}
+
+// 引入字体图标
+@font-face {
+    font-family: "iconfont";
+    src: url("./assets/fontIcon/iconfont.eot?t=1594112878280");
+    /* IE9 */
+    src: url("./assets/fontIcon/iconfont.eot?t=1594112878280#iefix") format("embedded-opentype"),
+        /* IE6-IE8 */ url("./assets/fontIcon/iconfont.woff?t=1594112878280") format("woff"),
+        url("./assets/fontIcon/iconfont.ttf?t=1594112878280") format("truetype"),
+        /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+            url("./assets/fontIcon/iconfont.svg?t=1594112878280#iconfont") format("svg");
+    /* iOS 4.1- */
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// 富文本容器
+.edit-content {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.overflow-scroll {
+    overflow: auto;
+}
+
+// 背景选中
+.link-active {
+    &:active {
+        background: $panel-1;
+    }
+}
+
+// 拟态投影 panel-4
+.shadow-panel-4 {
+    box-shadow: var(--mimicry-shadow);
+}
+// 拟态投影 panel-5
+.shadow-panel-5 {
+    box-shadow: var(--form-panel-3,#393948);
+}
+.box-shadow {
+    box-shadow: $shadow;
+}
+.box-nei-shadow {
+    box-shadow: var(--nei-shadow);
+}
+.transition-default {
+    transition: all 0.3s;
+}
+
+navigator {
+    display: inline-block;
+}
+// picker
+.lb-picker-header {
+    &::before,
+    &::after {
+        border: none !important;
+    }
+}
+.lb-picker-header-actions {
+    background-color: $panel-3;
+}
+.uni-picker-view-indicator {
+    &::before,
+    &::after {
+        border: none !important;
+    }
+}
+.lb-picker-content {
+    background-color: $panel-4 !important;
+}
+.uni-picker-view-mask {
+    background: var(--picker-mask);
+    background-position: top, bottom;
+    background-size: 100% 102px;
+    background-repeat: no-repeat;
+}
+.lb-picker-action-confirm-text {
+    color: $green !important;
+}
+
+.app-nav {
+    height: $status-bar;
+}
+.padding-nav {
+    padding-top: $status-bar;
+}
+@import "./vant.scss";

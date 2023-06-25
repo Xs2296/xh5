@@ -1,0 +1,317 @@
+{
+	"pages": [{
+			"path": "pages/startPage/index"
+		},
+		{
+			"path": "pages/base/index",
+			"style": {
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/base/home"
+			
+		},
+		{
+			"path": "pages/base/indexs"
+
+		},
+		{
+			"path": "pages/base/exchange-operation"
+
+		},
+		
+		{
+			"path": "pages/base/bibi"
+
+		},
+		{
+			"path": "pages/base/contract"
+
+		},
+		{
+			"path": "pages/base/contract-m"
+
+		},
+		{
+			"path": "pages/base/miao"
+
+		},
+		{
+			"path": "pages/index/index"
+		},
+
+		{
+			"path": "pages/login/index"
+		},
+		{
+			"path": "pages/reg/index"
+		},
+		{
+			"path": "pages/purchase/index"
+		},
+		{
+			"path": "pages/safe/forget-password"
+		},
+		{
+			"path": "pages/notice/detail"
+		},
+		{
+			"path": "pages/accountSettings/accountSettings"
+		},
+		{
+			"path": "pages/assets/recharge"
+		},
+		{
+			"path": "pages/assets/draw"
+		},
+		{
+			"path": "pages/assets/shengou"
+		},
+		{
+			"path": "pages/assets/address-list"
+		},
+		{
+			"path": "pages/assets/edit-address"
+		},
+		{
+			"path": "pages/invite/index"
+		},
+		{
+			"path": "pages/invite/level"
+		},
+		{
+			"path": "pages/pledge/index"
+		},
+		{
+			"path": "pages/pledge/order"
+		},
+		{
+			"path": "pages/pledge/detail"
+		},
+		{
+			"path": "pages/commission/index"
+		},
+		{
+			"path": "pages/commission/revoke"
+		},
+		{
+			"path": "pages/auth/index"
+		},
+		{
+			"path": "pages/auth/primary"
+		},
+		{
+			"path": "pages/auth/senior"
+		},
+		{
+			"path": "pages/safe/index"
+		},
+		{
+			"path": "pages/safe/login-password"
+		},
+		{
+			"path": "pages/safe/phone"
+		},
+		{
+			"path": "pages/safe/google"
+		},
+		{
+			"path": "pages/safe/transaction-password"
+		},
+		{
+			"path": "pages/safe/email"
+		},
+		{
+			"path": "pages/notice/index"
+		},
+		{
+			"path": "pages/notice/msg-detail"
+		},
+		{
+			"path": "pages/option/index"
+		},
+		{
+			"path": "pages/transfer/index"
+		},
+		{
+			"path": "pages/transfer/bill"
+		},
+		{
+			"path": "pages/assets/bill"
+		},
+		{
+			"path": "pages/exchange/index"
+		},
+		{
+			"path": "pages/exchange/contract_m_k"
+		},
+		{
+			"path": "pages/exchange/contract_m_log"
+		},
+		{
+			"path": "pages/assets/account-bill"
+		},
+		{
+			"path": "pages/assets/account-miao"
+		},
+		{
+			"path": "pages/assets/account-bibi"
+		},
+		{
+			"path": "pages/help/index"
+		},
+		{
+			"path": "pages/help/detail"
+		},
+		{
+			"path": "pages/help/sort"
+		},
+		{
+			"path": "pages/help/pingtai"
+		},
+		{
+			"path": "pages/list/list"
+		},
+		{
+			"path": "pages/contact/index"
+		},
+		{
+			"path": "pages/server/index"
+		},
+		{
+			"path": "pages/option/delivery-detail"
+		},
+		{
+			"path": "pages/income/index"
+		},
+		{
+			"path": "pages/otc/send-ad"
+		},
+		{
+			"path": "pages/otc/order"
+		},
+		{
+			"path": "pages/otc/ad"
+		},
+		{
+			"path": "pages/otc/detail"
+		},
+		{
+			"path": "pages/otc/pays"
+		},
+		{
+			"path": "pages/otc/direct-recharge"
+		},
+		{
+			"path": "pages/otc/bind-pay"
+		},
+		{
+			"path": "pages/otc/bank-list"
+		},
+		{
+			"path": "pages/otc/bill"
+		},
+
+		{
+			"path": "pages/service/index",
+			"style": {
+				"navigationStyle": "default",
+				"app-plus": {
+					"titleNView": {}
+				}
+			}
+		},
+		{
+			"path": "pages/upgrade/index",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"animationType": "fade-in",
+					"background": "transparent",
+					"backgroundColor": "rgba(0,0,0,0)",
+					"popGesture": "none"
+				}
+			}
+		}, {
+			"path": "pages/Subscribe/Subscribe",
+			"style": {
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}
+	],
+	"globalStyle": {
+		"app-plus": {
+			"titleNView": false
+		},
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#007AFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	// "tabBar": {
+	// 	"color": "#333333",
+	// 	"selectedColor": "#ff6237",
+	// 	"backgroundColor": "#ffffff",
+	// 	"borderStyle": "white",
+	// 	"fontSize": "15px",
+	// 	"list": [
+	// 		{
+	// 			"pagePath": "pages/base/home",
+	// 			"iconPath": "static/img/base_home_0.png",
+	// 			"selectedIconPath": "static/img/base_home_1.png",
+	// 			"text": "home1"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/base/contract",
+	// 			"iconPath": "static/img/icon_jiaoyi_0.png",
+	// 			"selectedIconPath": "static/img/icon_jiaoyi_1.png",
+	// 			"text": "contract1"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/base/bibi",
+	// 			"iconPath": "static/img/base_qukuai_0.png",
+	// 			"selectedIconPath": "static/img/base_qukuai_1.png",
+	// 			"text": "bibi1"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/base/miao",
+	// 			"iconPath": "static/img/base_caidan_0.png",
+	// 			"selectedIconPath": "static/img/base_caidan_1.png",
+	// 			"text": "miao1"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/base/mine",
+	// 			"iconPath": "static/img/base_assets_0.png",
+	// 			"selectedIconPath": "static/img/base_assets_1.png",
+	// 			"text": "mine1"
+	// 		}
+	// 	]
+	// },
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^van-(.*)": "@/wxcomponents/vant/$1/index.vue",
+			"v-button": "@/layout/vButton.vue",
+			"v-input": "@/layout/vInput.vue",
+			"v-header": "@/layout/vHeader.vue",
+			"v-code": "@/layout/vCode.vue",
+			"v-country": "@/layout/vCountry.vue",
+			"v-link": "@/layout/vLink.vue",
+			"v-notice-bar": "@/layout/vNoticeBar.vue",
+			"v-lang": "@/layout/vLang.vue",
+			"v-qr": "@/layout/vQr.vue",
+			"v-scroll": "@/layout/vScroll.vue",
+			"v-paging": "@/layout/vPaging.vue",
+			"v-curve": "@/layout/vCurve.vue",
+			"v-picker": "@/layout/vPicker.vue",
+			"v-page": "@/layout/vPage.vue",
+			"not-data": "@/layout/notData.vue"
+		}
+	}
+}

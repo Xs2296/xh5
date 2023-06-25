@@ -1,0 +1,22 @@
+// 边框
+@mixin harirline-common {
+    position: absolute;
+    box-sizing: border-box;
+    display: block;
+    content: ' ';
+    pointer-events: none;
+    border-radius: inherit;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    transform: scale(0.5);
+}
+
+// 溢出省略
+@mixin eps($num:1) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $num;
+    overflow: hidden;
+}

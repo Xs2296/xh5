@@ -1,0 +1,71 @@
+.js-rootresizer__contents{
+    background: #2b2b37;
+}
+.favored-list-container span{
+    background-color: #2b2b37;
+    border-color: #646566;
+}
+.bottom-widgetbar-content.backtesting .button, .header-chart-panel .button, .hotlist-controls .button, .symbol-edit-widget .button{
+    background-color: #2b2b37;
+    border-color: #646566;
+}
+.chart-page .chart-container{
+    background: #2b2b37;
+    border-color: #242530;
+}
+.tv-close-panel.top{
+    width: 30px;
+    height: 30px;
+    bottom:0;
+    left: auto;
+    right: 5px;
+    border-color: #646566;
+    background-color: #2b2b37;
+    border-width: 1px;
+}
+.tv-close-panel.bottom{
+    left: auto;
+    right: 5px;
+    border-color: #646566;
+    background-color: #2b2b37;
+    border-width: 1px;
+}
+.properties-tabs a.properties-tabs-label{
+    margin-left: 10px;
+}
+._tv-dialog{
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+}
+/* 隐藏 plain */
+/* .pane-legend {
+    display: none;
+} */
+.pane-legend-line > .main{
+    display: none !important;
+}
+.pane-legend-item-value-container{
+    border-radius: 3px;
+    background-color: rgba(0,0,0,.6);
+}
+@media only screen and (max-width: 567px){
+    .header-chart-panel .group.header-group-bars-style{
+        display: inline-block !important;
+    }
+}
+.pane-legend-line.pane-legend-wrap.study>.pane-legend-line ,.pane-legend-line span{
+    font-size: 9px !important;
+}
+
+@media screen and (max-width: 767px){
+    .pane-legend-item-value-wrap .pane-legend-item-value-title__main, .pane-legend-item-value-wrap .pane-legend-item-value__main{
+        font-size: 8px !important;
+    }
+}
+
+@media only screen and (max-width: 410px){
+    .header-chart-panel .group.header-group-indicators{
+        display: inline-block !important;
+    }
+}

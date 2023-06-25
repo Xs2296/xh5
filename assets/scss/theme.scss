@@ -1,0 +1,81 @@
+// -------不可修改↓--------
+$black: #000 !default;
+$white: #fff !default;
+$gray-1: #f7f8fa !default;
+$gray-2: #f2f3f5 !default;
+$gray-3: #ebedf0 !default;
+$gray-4: #dcdee0 !default;
+$gray-5: #c8c9cc !default;
+$gray-6: #888894 !default;
+$gray-7: #646566 !default;
+$gray-8: #323233 !default;
+$gray-9: #202635 !default;
+$red: #ee0a24 !default;
+$blue: #1989fa !default;
+$orange: #ff976a !default;
+$yellow: #f8b936 !default;
+$orange-dark: #ed6a0c !default;
+$orange-light: #fffbe8 !default;
+$green: #79D47C !default;
+// 采用字体样式
+$base-font-family: -apple-system,
+BlinkMacSystemFont,
+"Helvetica Neue",
+Helvetica,
+Segoe UI,
+Arial,
+Roboto,
+"PingFang SC",
+"Hiragino Sans GB",
+"Microsoft Yahei",
+sans-serif;
+$price-integer-font-family: Avenir-Heavy,
+PingFang SC,
+Helvetica Neue,
+Arial,
+sans-serif;
+// --------------------
+// ------随便你改↓-------
+$plain:var(--plain,#fff);
+$theme-1: #ceb359 !default;
+// $theme-1:#ff4d5c !default;
+$buy: #79D47C !default;
+$sell: #ea3131 !default;
+$panel-1: var(--panel-1,#2A2A38) !default;
+$panel-2: var(--panel-2,#343445) !default;
+$panel-3: var(--panel-3,#393948) !default;
+$panel-4: var(--panel-4,#484859) !default;
+$panel-5: #202635 !default;
+$panel-6: #646566 !default;
+$form-panel-3: var(--form-panel-3,#393948) !default;
+$form-panel-4: var(--form-panel-4,#484859) !default;
+$text-color: var(--text-color,#9FA6B5) !default;
+$active-color: $gray-2 !default;
+$active-opacity: 0.7 !default;
+$disabled-opacity: 0.5 !default;
+$text-link-color: #576b95 !default;
+$light:var(--light,#333);
+
+$bg-top:var(--bg-top,#383847);
+$bg-bottom:var(--bg-bottom,#242230);
+$bg: linear-gradient(to bottom,$bg-top,$bg-bottom);
+$tab-nav:var(--tab-nav,#31313F);
+
+// 边框
+
+$border-color: var(--border-color,#49495F) !default;
+
+// 阴影
+$shadow:var(--shadow, 0px 0px 33px 0px rgba(34, 34, 44, 0.25));
+// 内阴影
+$nei-shadow:var(--nei-shadow, 0px 0px 33px 0px rgba(34, 34, 44, 0.25));
+// 渐变
+$gradient-blue:linear-gradient(315deg, #4048EF 0%, #5A7BEF 100%);
+// $gradient-green:linear-gradient(328deg, #2FAD66 0%, #9DE686 100%);
+$gradient-green:linear-gradient(328deg, #60c08c 0%, #60c08c 100%);
+// $gradient-red: linear-gradient(270deg, #F15887 0%, #FE9B86 100%);
+$gradient-red: linear-gradient(270deg, #ce5b67 0%, #ce5b67 100%);
+$gradient-yellow:linear-gradient(315deg, #f6c769 0%, #f9ba44 100%);
+
+// 底部阴影
+$tab-nav-shadow:var(--tab-nav-shadow,0px -7px 20px 0px rgba(37, 37, 48, 0.83));

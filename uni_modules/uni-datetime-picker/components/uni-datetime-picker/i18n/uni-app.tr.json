@@ -1,0 +1,8 @@
+{
+	"common": {
+		"uni.picker.done": "tamam",
+		"uni.picker.cancel": "iptal et"
+	},
+	"ios": {},
+	"android": {}
+}
