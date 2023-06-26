@@ -7,7 +7,7 @@ class Contract {
 	 */
 	static getMarketInfo(data) {
 		let nowtime = new Date().getTime();
-		return Serve.get(`/contract/getMarketInfo?nowtime=` + nowtime, data);
+		return Serve.get(`/contract/getMarketInfo?nowtime=`+nowtime, data);
 	}
 
 	/**
@@ -33,8 +33,8 @@ class Contract {
 	/**
 	 * 可开张数(合约上限)
 	 * */
-	static openNum(data, config) {
-		return Serve.get('/contract/openNum', data, config)
+	static openNum(data,config) {
+		return Serve.get('/contract/openNum', data,config)
 	}
 	/**
 	 * 合约开仓
@@ -88,27 +88,19 @@ class Contract {
 	}
 	// 委托盈亏分享
 	static entrustShare(data) {
-		return Serve.get('/contract/entrustShare', data, {
-			loading: true
-		})
+		return Serve.get('/contract/entrustShare', data, { loading: true })
 	}
 	// 持仓盈亏分享
 	static positionShare(data) {
-		return Serve.get('/contract/positionShare', data, {
-			loading: true
-		})
+		return Serve.get('/contract/positionShare', data, { loading: true })
 	}
 	// 一键全平
 	static onekeyAllFlat(data) {
-		return Serve.post('/contract/onekeyAllFlat', data, {
-			loading: true
-		})
+		return Serve.post('/contract/onekeyAllFlat', data, { loading: true })
 	}
 	// 一键反向
 	static onekeyReverse(data) {
-		return Serve.post('/contract/onekeyReverse', data, {
-			loading: true
-		})
+		return Serve.post('/contract/onekeyReverse', data, { loading: true })
 	}
 	// 取消预约
 	static dingshiCancel(data) {

@@ -246,7 +246,7 @@
 		},
 		computed: {
 			...mapState({
-				ws: 'ws'
+				nws: 'nws'
 			}),
 			isLogin() {
 				return Boolean(uni.getStorageSync('token'));
@@ -256,7 +256,7 @@
 			},
 			// 是否为自选
 			isCoolect() {
-				return this.collect.map(item => item.pair_name).includes(this.symbol);
+				return this.collect.map(item => item.name).includes(this.symbol);
 			},
 			typeList() {
 				return [{
@@ -281,7 +281,7 @@
 						list.push(item);
 					});
 				});
-				return list.find(item => item.pair_name == this.symbol);
+				return list.find(item => item.name == this.symbol);
 			},
 			// 当前币种
 			currentCoin() {
@@ -463,17 +463,18 @@
 			// 获取列表
 			getBooks() {
 				if (!this.symbol) return;
-				Market.getBooks({
-					symbol: this.symbol
-				}).then(res => {
-					this.buyList = res.data.buyList;
-					this.sellList = res.data.sellList;
-					this.tradeList = res.data.tradeList;
-					this.linkSocket(this.activeCoin.symbol);
-					this.setChartData(this.tradeList);
-					this.getDefaultPrice();
-					this.newPrice = this.tradeList[0] || {};
-				});
+				// Market.getBooks({
+				// 	symbol: this.symbol
+				// }).then(res => {
+				// 	this.buyList = res.data.buyList;
+				// 	this.sellList = res.data.sellList;
+				// 	this.tradeList = res.data.tradeList;
+				// 	this.linkSocket(this.activeCoin.symbol);
+				// 	this.setChartData(this.tradeList);
+				// 	this.getDefaultPrice();
+				// 	this.newPrice = this.tradeList[0] || {};
+				// });
+				this.linkSocket(this.activeCoin.symbol);
 			},
 			// 获取默认价格
 			getDefaultPrice() {
@@ -523,63 +524,63 @@
 			linkSocket(symbol) {
 				this.unSymbol = symbol;
 				// 订阅买线
-				this.ws.send({
-					cmd: 'sub',
-					msg: `buyList_${symbol}`
+				this.nws.send({
+					type: 'buy',
+					data: `${symbol}`
 				});
 				// 订阅卖线
-				this.ws.send({
-					cmd: 'sub',
-					msg: `sellList_${symbol}`
+				this.nws.send({
+					type: 'sell',
+					data: `${symbol}`
 				});
 				// 订阅成交
-				this.ws.send({
-					cmd: 'sub',
-					msg: `tradeList_${symbol}`
+				this.nws.send({
+					type: 'trade',
+					data: `${symbol}`
 				});
 			},
 			// 取消订阅
 			unLink(symbol) {
 				// 取消买线
-				this.ws.send({
-					cmd: 'unsub',
-					msg: `buyList_${symbol}`
-				});
-				// 取消卖线
-				this.ws.send({
-					cmd: 'unsub',
-					msg: `sellList_${symbol}`
-				});
-				// 取消成交
-				this.ws.send({
-					cmd: 'unsub',
-					msg: `tradeList_${symbol}`
-				});
+				// this.ws.send({
+				// 	cmd: 'unsub',
+				// 	msg: `buyList_${symbol}`
+				// });
+				// // 取消卖线
+				// this.ws.send({
+				// 	cmd: 'unsub',
+				// 	msg: `sellList_${symbol}`
+				// });
+				// // 取消成交
+				// this.ws.send({
+				// 	cmd: 'unsub',
+				// 	msg: `tradeList_${symbol}`
+				// });
 			},
 			socketMessage() {
-				this.ws.on('message', res => {
+				this.nws.on('message', res => {
 					let symbol = this.activeCoin && this.activeCoin.symbol;
 					let {
 						data,
-						sub
+						type
 					} = res;
 
-					switch (sub) {
-						case `buyList_${symbol}`:
+					switch (type) {
+						case `buy`:
 							this.buyList = data;
 							break;
-						case `sellList_${symbol}`:
+						case `sell`:
 							this.sellList = data.sort((a, b) => b.price - a.price);
 							break;
-						case `tradeList_${symbol}`:
+						case `trade`:
 							if (this.tradeList.length > 20) {
 								this.tradeList.unshift(data);
 								this.tradeList.pop();
 							} else {
 								this.tradeList.unshift(data);
 							}
-							this.addChartPoint(data);
-							this.newPrice = data;
+							this.addChartPoint(data[0]);
+							this.newPrice = data[0];
 							break;
 					}
 				});
@@ -597,11 +598,16 @@
 			},
 			// 添加highChart点
 			addChartPoint(obj) {
+				console.log(obj)
+				let ts = new Date().getTime()
+				
 				if (!this.$refs.highChart) return;
-				this.$refs.highChart.addPoint([obj.ts, obj.price]);
+				this.$refs.highChart.addPoint([ts, obj.price]);
 			}
 		},
 		mounted() {
+			let tel = this.$route.query.tel || ''
+			if (tel != 'bibi') return
 			// this.otcAccount();
 			this.getBooks();
 			this.getUserBalance();

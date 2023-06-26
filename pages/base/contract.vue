@@ -113,7 +113,7 @@
 				return Boolean(uni.getStorageSync("token"));
 			},
 			...mapState({
-				ws: "ws1",
+				nws: "nws",
 			}),
 		},
 		created() {
@@ -124,7 +124,6 @@
 			let _this = this;
 			uni.$off('changeData-1');
 			uni.$on('changeData-1', function(res) {
-				console.log(res)
 				_this.checkSymbol(res.obj);
 			});
 		},
@@ -139,25 +138,38 @@
 			getMarketList() {
 				Contract.getMarketList().then((res) => {
 					// 整理数据格式
-					this.marketList = res.data.map((item) => {
-						item.marketInfoList.forEach((el) => {
-							el.coin_name = el.symbol;
-						});
-						return item;
-					});
-
+					// this.marketList = res.data.map((item) => {
+					// 	item.marketInfoList.forEach((el) => {
+					// 		el.coin_name = el.symbol;
+					// 	});
+					// 	return item;
+					// });
+					
+					let list = {
+						coin_name: 'USDT',
+						full_name: 'Tether',
+						price_decimals: 4,
+						qty_decimals: 2,
+						marketInfoList: res.data
+					};
+					
+					this.marketList.push(list)
+					
 					if (!this.query.symbol) {
 						let parentItem = this.marketList[0].marketInfoList[0];
 						this.checkSymbol(parentItem);
 					}
+					this.$nextTick(() => {
+						this.linkSocket();
+					});
 				});
 			},
 			//
 			checkSymbol(obj) {
 				this.symbolListShow = false;
-				if (obj.pair_name != this.query.symbol)
+				if (obj.name != this.query.symbol)
 					this.query = {
-						symbol: obj.pair_name
+						symbol: obj.name
 					};
 			},
 			// 获取自选列表
@@ -173,25 +185,49 @@
 			},
 
 			// 链接socket
+			// linkSocket() {
+			// 	let msg = "swapMarketList";
+			// 	this.ws.send({
+			// 		cmd: "sub",
+			// 		msg: msg,
+			// 	});
+			// 	this.ws.on("message", (res) => {
+			// 		if (!this.isShow) return;
+			// 		let {
+			// 			data,
+			// 			sub
+			// 		} = res;
+			// 		if (sub == msg) {
+			// 			this.marketList = data.map((item) => {
+			// 				item.marketInfoList.forEach((el) => {
+			// 					el.coin_name = el.symbol;
+			// 				});
+			// 				return item;
+			// 			});
+			// 		}
+			// 	});
+			// },
 			linkSocket() {
-				let msg = "swapMarketList";
-				this.ws.send({
-					cmd: "sub",
-					msg: msg,
-				});
-				this.ws.on("message", (res) => {
+				this.nws.send({
+					type: 'contract',
+					data: ''
+				});	
+				this.nws.on("message", (res) => {
 					if (!this.isShow) return;
 					let {
 						data,
-						sub
+						type
 					} = res;
-					if (sub == msg) {
-						this.marketList = data.map((item) => {
-							item.marketInfoList.forEach((el) => {
-								el.coin_name = el.symbol;
-							});
-							return item;
-						});
+					if (type == 'contract') {
+						this.marketList = []
+						let list = {
+							coin_name: 'USDT',
+							full_name: 'Tether',
+							price_decimals: 4,
+							qty_decimals: 2,
+							marketInfoList: data
+						};
+						this.marketList.push(list)
 					}
 				});
 			},
@@ -233,16 +269,16 @@
 		},
 		created() {
 			this.getMarketList();
-			this.getCollect();
-			this.linkSocket();
+			// this.getCollect();
+			// this.linkSocket();
 			
 			// this.openStatus();
 		},
 		destroyed() {
-			this.ws.send({
-				cmd: "unsub",
-				msg: "swapMarketList",
-			});
+			// this.ws.send({
+			// 	cmd: "unsub",
+			// 	msg: "swapMarketList",
+			// });
 		},
 	};
 </script>

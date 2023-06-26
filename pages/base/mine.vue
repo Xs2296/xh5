@@ -116,22 +116,22 @@
 									</view>
 									<view>
 										<text
-											class="fn-lg color-light fn-middle">{{ add(item.usable_balance, item.freeze_balance, item.priceDecimals) }}</text>
+											class="fn-lg color-light fn-middle">{{ add(item.usable, item.freeze, 4) }}</text>
 										<!-- <van-icon class="p-l-xs fn-middle" name="arrow" size="16" color="#646566" /> -->
 									</view>
 								</view>
 								<view class="p-x-md d-flex justify-between align-center">
 									<view class="w-4/12">
 										<p class="color-gray-6" style="padding: 5px 0">{{ $t('base.b9') }}</p>
-										<p class="fn-xs color-light">{{ item.usable_balance }}</p>
+										<p class="fn-xs color-light">{{ item.usable }}</p>
 									</view>
 									<view class="w-4/12">
 										<p class="color-gray-6" style="padding: 5px 0">{{ $t('base.e2') }}</p>
-										<p class="fn-xs color-light">{{ item.freeze_balance }}</p>
+										<p class="fn-xs color-light">{{ item.freeze }}</p>
 									</view>
 									<view class="w-4/12 fn-right">
 										<p class="color-gray-6" style="padding: 5px 0">{{ $t('base.e3') }}(USD)</p>
-										<p class="fn-xs color-light">{{ omitTo(item.usd_estimate, item.priceDecimals) }}
+										<p class="fn-xs color-light">{{ omitTo(item.total, 4) }}
 										</p>
 									</view>
 								</view>
@@ -165,7 +165,7 @@
 						</view>
 					</van-tab>
 
-					<van-tab :title="$t('expand.秒合约账户')" :name="2" class="p-t-md">
+					<!-- <van-tab :title="$t('expand.秒合约账户')" :name="2" class="p-t-md">
 						<view class="m-x-md">
 							<view class="bgb3 p-x-md p-y-lg rounded-lg" :class="theme == 'light' ? 'bgb3-white' : ''"
 								style="position: relative">
@@ -181,14 +181,14 @@
 								<view class="d-flex justify-between m-t-xs">
 									<v-link to="/pages/transfer/index" class="d-flex">
 										<view class="m-r-xs align-center"><img :src="$localImgUrl('fill4.png')" alt=""
-												class="h-18" /></view>
+												class="h-18" /></view> -->
 										<!-- <van-icon class="color-theme-1 fn-26 fn-middle m-r-xs" name="exchange" /> -->
-										<text class="color-light fn-middle">{{ $t('base.d8') }}</text>
+										<!-- <text class="color-light fn-middle">{{ $t('base.d8') }}</text>
 									</v-link>
 								</view>
 							</view>
 						</view>
-					</van-tab>
+					</van-tab> -->
 
 					
 				</van-tabs>
@@ -210,7 +210,9 @@
 		data() {
 			return {
 				NewAddress: '',
-				account: null,
+				account: {
+					total_assets_usd: 0
+				},
 				list: [],
 				tabActive: 0, // 切换选择
 				searchText: '',
@@ -272,18 +274,19 @@
 				if (!this.hide) return true && show;
 
 				// 0余额资金过滤
-				let hasMoney = this.add(item.usable_balance, item.freeze_balance, item.priceDecimals) * 1 != 0;
+				let hasMoney = this.add(item.usable, item.freeze, 4) * 1 != 0;
 				return hasMoney && show;
 			},
 			fundAccount() {
 				Wallet.fundAccount().then(res => {
-					this.list = res.data.list;
-					this.otc_info = res.data.otc_info;
+					this.list = res.data;
+					// this.otc_info = res.data.otc_info;
 				});
 			},
 			personalAssets() {
 				Wallet.personalAssets().then(res => {
 					this.account = res.data;
+					this.account.second_account_usd = 0
 				});
 			},
 			// 获取合约列表
@@ -314,11 +317,11 @@
 			this.show = true;
 			console.log(this.theme);
 		},
-		// onShow() {
-		// 	this.upDateData();
-		// },
+		onShow() {
+			this.upDateData();
+		},
 		created() {
-			console.log(1111);
+			this.upDateData();
 			// this.Toclick()
 			// this.NewAddress=uni.getStorageSync('address')
 

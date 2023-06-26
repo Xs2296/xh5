@@ -68,7 +68,7 @@ export default {
     },
   },
   created() {
-    this.appTokenAssets();
+    // this.appTokenAssets();
   },
 };
 </script>

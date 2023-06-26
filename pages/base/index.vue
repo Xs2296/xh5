@@ -116,14 +116,16 @@
 			};
 		},
 		methods: {
-			getUserWithdrawAdress() {
-				Wallet.getUserWithdrawAdress().then((res) => {
-					this.list = res.data;
-					this.Address = res.data[0].list[0].address
-
-					uni.setStorageSync('address', this.Address)
-				});
-			},
+      getUserWithdrawAdress() {
+        Wallet.getUserWithdrawAdress().then((res) => {
+          this.list = res.data;
+          this.Address = ''
+          if (res.data.length > 0) {
+            this.Address = res.data[0].list[0].address
+          }
+          uni.setStorageSync('address', this.Address)
+        });
+      },
 			active(tel) {
 				return this.tab == 'contract' ? tel.indexOf(this.tab) > -1 : this.tab == tel;
 			},

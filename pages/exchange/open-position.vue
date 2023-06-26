@@ -165,7 +165,7 @@
 			return {
 				sellList: [],
 				buyList: [],
-				// tradeList: [],
+				tradeList: [],
 				symbolDetail: {},
 				show: false,
 				accountInfo: {},
@@ -198,7 +198,7 @@
 				}];
 			},
 			...mapState({
-				ws: 'ws1'
+				nws: 'nws'
 			}),
 			symbol() {
 				return this.query.symbol;
@@ -254,9 +254,12 @@
 		methods: {
 			// 获取买卖盘
 			getMarketInfo() {
+				
 				let data = {
 					symbol: this.symbolLeft
 				};
+				this.linkSocket(data.symbol);
+				return
 				Contract.getMarketInfo(data, {
 					loading: true
 				}).then(res => {
@@ -353,7 +356,7 @@
 			// 开仓
 			openPosition(side) {
 				var total = parseInt(this.margin)
-				console.log(total)
+				console.log(total, this.maxNum)
 				if (total < 100) {
 					this.$toast(this.$t('contract.b1') + this.$t('pledge.minnum') + '100');
 					return false
@@ -403,35 +406,36 @@
 			linkSocket(symbol) {
 				this.unSymbol = symbol;
 				// 订阅买线
-				this.ws.send({
-					cmd: 'sub',
-					msg: `swapBuyList_${symbol}`
+				this.nws.send({
+					type: 'buy',
+					data: `${symbol}`
 				});
 				// 订阅卖线
-				this.ws.send({
-					cmd: 'sub',
-					msg: `swapSellList_${symbol}`
+				this.nws.send({
+					type: 'sell',
+					data: `${symbol}`
 				});
 				// 订阅成交
-				this.ws.send({
-					cmd: 'sub',
-					msg: `swapTradeList_${symbol}`
+				this.nws.send({
+					type: 'trade',
+					data: `${symbol}`
 				});
 			},
 			// 取消订阅
 			unLink(symbol) {
+				return
 				// 取消买线
-				this.ws.send({
+				this.nws.send({
 					cmd: 'unsub',
 					msg: `swapBuyList_${symbol}`
 				});
 				// 取消卖线
-				this.ws.send({
+				this.nws.send({
 					cmd: 'unsub',
 					msg: `swapSellList_${symbol}`
 				});
 				// 取消成交
-				this.ws.send({
+				this.nws.send({
 					cmd: 'unsub',
 					msg: `swapTradeList_${symbol}`
 				});
@@ -444,30 +448,32 @@
 				let sellFun = lodash.throttle(data => {
 					this.sellList = data.sort((a, b) => b.price - a.price);
 				}, 500);
-				this.ws.on('message', res => {
+				this.nws.on('message', res => {
 					if (!this.isShow) return;
 					let symbol = this.symbolLeft;
 					let {
 						data,
-						sub
+						type
 					} = res;
-					switch (sub) {
-						case `swapBuyList_${symbol}`:
+					switch (type) {
+						case `buy`:
 							buyFun(data);
 							break;
-						case `swapSellList_${symbol}`:
+						case `sell`:
 							sellFun(data);
 							break;
-						case `swapTradeList_${symbol}`:
+						case `trade`:
 							this.tradeList.unshift(data);
 							this.tradeList.pop();
-							this.newPrice = data;
+							this.newPrice = data[0];
 							break;
 					}
 				});
 			}
 		},
 		mounted() {
+			let tel = this.$route.query.tel || ''
+			if (tel != 'contract') return
 			if (this.symbol) {
 				this.getMarketInfo();
 				this.contractAccount();

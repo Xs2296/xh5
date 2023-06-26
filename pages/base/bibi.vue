@@ -80,22 +80,22 @@
 			isShow(n) {
 				if (n) {
 					setTimeout(() => {
-						this.ws.send({
-							cmd: 'sub',
-							msg: this.msg
+						this.nws.send({
+							type: 'exchange',
+							data: ''
 						});
 					}, 200);
 				} else {
-					this.ws.send({
-						cmd: 'unsub',
-						msg: this.msg
-					});
+					// this.ws.send({
+					// 	cmd: 'unsub',
+					// 	msg: this.msg
+					// });
 				}
 			}
 		},
 		computed: {
 			...mapState({
-				ws: 'ws'
+				nws: 'nws'
 			}),
 			isLogin() {
 				return Boolean(uni.getStorageSync('token'));
@@ -121,15 +121,18 @@
 			},
 			// 获取市场行情
 			getMarketList() {
-				Market.getMarketList().then(res => {
-					this.marketList = res.data;
-					this.$nextTick(() => {
-						this.linkSocket();
-					});
-					if (!this.query.symbol) {
-						let parentItem = this.marketList[0].marketInfoList[0];
-						this.checkSymbol(parentItem);
-					}
+				// Market.getMarketList().then(res => {
+				// 	this.marketList = res.data;
+				// 	this.$nextTick(() => {
+				// 		this.linkSocket();
+				// 	});
+				// 	if (!this.query.symbol) {
+				// 		let parentItem = this.marketList[0].marketInfoList[0];
+				// 		this.checkSymbol(parentItem);
+				// 	}
+				// });
+				this.$nextTick(() => {
+					this.linkSocket();
 				});
 			},
 			// 获取自选列表
@@ -146,9 +149,9 @@
 			//
 			checkSymbol(obj) {
 				this.symbolListShow = false;
-				if (obj.pair_name == this.query.symbol) return;
+				if (obj.name == this.query.symbol) return;
 				this.query = {
-					symbol: obj.pair_name
+					symbol: obj.name
 				};
 				// this._router.replace({ query: { symbol: obj.pair_name } });
 			},
@@ -171,18 +174,29 @@
 			},
 			// 链接socket
 			linkSocket() {
-				let msg = this.msg;
-				this.ws.send({
-					cmd: 'sub',
-					msg
+				this.nws.send({
+					type: 'exchange',
+					data: ''
 				});
-				this.ws.on('message', res => {
+				this.nws.on('message', res => {
 					let {
 						data,
-						sub
+						type
 					} = res;
-					if (sub == msg) {
-						this.marketList = data;
+					if (type == 'exchange') {
+						this.marketList = []
+						let list = {
+							coin_name: 'USDT',
+							full_name: 'Tether',
+							price_decimals: 4,
+							qty_decimals: 2,
+							marketInfoList: data
+						};
+						this.marketList.push(list)
+						if (!this.query.symbol) {
+							let parentItem = this.marketList[0].marketInfoList[0];
+							this.checkSymbol(parentItem);
+						}
 					}
 				});
 			},
@@ -204,7 +218,7 @@
 			if (this.query.symbol) {
 				this.query.symbol = decodeURIComponent(this.query.symbol);
 			}
-			// this.getMarketList();
+			this.getMarketList();
 			// this.getCollect();
 		},
 		destroyed() {
